@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Sitemap: /sitemap.xml
+# Please ensure your sitemap is accessible at the path specified above.
+# If your application is hosted in a sub-path, or your sitemap is generated at a different URL,
+# you may need to adjust the Sitemap directive accordingly.
+# For example, if your NEXT_PUBLIC_BASE_URL is https://www.example.com/myapp
+# and your sitemap is at /myapp/sitemap.xml, you might need to use:
+# Sitemap: https://www.example.com/myapp/sitemap.xml
+# However, Next.js typically serves sitemap.xml from the root of the domain
+# when sitemap.ts is in the /app directory.
