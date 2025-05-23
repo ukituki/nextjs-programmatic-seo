@@ -3,7 +3,7 @@
 import LocationInput from "@/components/LocationInput";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { nicheConfig } from "@/niche.config"; // Import nicheConfig
+import { nicheConfig } from "@/config"; // Updated import path
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

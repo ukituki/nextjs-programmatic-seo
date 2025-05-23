@@ -1,7 +1,8 @@
-// src/data/sample-data.ts
+// src/data/sample-data-restaurants.ts 
+// (Note: This comment will be accurate after the file is renamed in the next step)
 import { DirectoryItem } from "../interfaces";
 
-export const sampleItems: DirectoryItem[] = [
+export const sampleRestaurantItems: DirectoryItem[] = [ // Renamed from sampleItems
   {
     id: 1,
     name: "Sushi Master SF",
@@ -122,7 +123,7 @@ export const sampleItems: DirectoryItem[] = [
     reviews: 234,
     tags: ["Lunch", "Dinner", "Sushi Bars"],
     category: "Japanese",
-    website: "www.sushimasterchicago.com"
+    website: "www.sushimasterchicago.com" // Note: website seems to be for a Chicago restaurant
   },
   {
     id: 20,
@@ -141,6 +142,7 @@ export const sampleItems: DirectoryItem[] = [
     tags: ["Lunch", "Dinner", "Sushi Bars", "Fine Dining"],
     category: "Japanese",
   },
+  // ... (rest of the restaurant items remain the same, just ensure they are part of sampleRestaurantItems)
   {
     id: 7,
     name: "Sushi Master Chicago",
@@ -415,4 +417,4 @@ export const sampleItems: DirectoryItem[] = [
   },
 ];
 
-export const locations = ["San Francisco, CA", "Chicago, IL", "Miami, FL"];
+export const restaurantLocations = ["San Francisco, CA", "Chicago, IL", "Miami, FL"]; // Renamed from locations

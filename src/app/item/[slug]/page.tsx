@@ -1,7 +1,7 @@
 // src/app/item/[slug]/page.tsx
 import { getItemBySlug, searchItems } from "@/lib/data-service";
 import { DirectoryItem } from "@/interfaces";
-import { nicheConfig } from "@/niche.config";
+import { nicheConfig } from "@/config"; // Updated import path
 import { Metadata } from "next";
 import Image from "next/image";
 // Note: In Next.js App Router, <Head> from 'next/head' is not used.
@@ -249,9 +249,9 @@ export default async function ItemPage({ params }: ItemPageProps) {
                 if (field.key === 'website') icon = <ExternalLink className="mr-3 mt-1 h-5 w-5 flex-shrink-0 text-gray-500" />;
                 return (
                   <div key={field.key} className="flex items-start">
-                    {!['Address', 'Location', 'Phone', 'Hours', 'Website'].includes(field.label) && <Badge variant="outline" className="mr-3 mt-1 flex-shrink-0">{field.label}</Badge>}
-                    {['Address', 'Location', 'Phone', 'Hours', 'Website'].includes(field.label) && icon}
-                    {field.key === 'website' ? (
+                    {!['Address', 'Location', 'Phone', 'Hours', 'Website', 'Event Website'].includes(field.label) && <Badge variant="outline" className="mr-3 mt-1 flex-shrink-0">{field.label}</Badge>}
+                    {['Address', 'Location', 'Phone', 'Hours', 'Website', 'Event Website'].includes(field.label) && icon}
+                    {(field.key === 'website' || field.key === 'eventWebsite') ? (
                       <a href={String(value).startsWith('http') ? String(value) : `http://${String(value)}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                         Visit Website
                       </a>

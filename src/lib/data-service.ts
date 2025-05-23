@@ -1,10 +1,13 @@
 // src/lib/data-service.ts
-import { DirectoryItem } from "../interfaces";
-import { sampleItems } from "../data/sample-data";
-import { nicheConfig } from "../niche.config";
+import { DirectoryItem } from "@/interfaces"; // Updated path
+// Import active niche config, sample items, and locations from the central loader
+import { nicheConfig, sampleItems, locations } from "@/config"; 
 
-// Re-export locations from sample-data. This might be integrated into nicheConfig or a dedicated locations service later.
-export { locations as allLocations } from "../data/sample-data";
+// No longer need to re-export locations, it's directly available from @/config if needed elsewhere,
+// or other files can import it directly from @/config.
+// For data-service itself, it now uses the imported 'locations' and 'sampleItems'.
+// If 'allLocations' was a specific alias used externally, those external files need to update their import.
+// For now, removing the re-export as its source is now also from @/config.
 
 /**
  * Represents a filter option available to the user, typically for faceted search.
@@ -40,7 +43,10 @@ export async function searchItems(
   // If not showing all, prepare search words. Otherwise, searchWords array remains empty.
   const searchWords = isShowAllQuery ? [] : lowerCaseQuery?.split(" ").filter(Boolean) || [];
 
-  return sampleItems
+  // Ensure sampleItems is used from the active niche context (imported from @/config)
+  const currentSampleItems = sampleItems; 
+
+  return currentSampleItems // Use currentSampleItems
     .filter((item) => {
       // Query matching:
       let matchesQuery = true; 
@@ -101,13 +107,14 @@ export async function getFilterOptions({
   await new Promise((resolve) => setTimeout(resolve, 200));
 
   const filterOptions: FilterOption[] = [];
+  const currentSampleItems = sampleItems; // Use active sample items
 
   // Iterate over each field defined as filterable in `nicheConfig.searchConfig.filterByFields`.
   for (const filterField of nicheConfig.searchConfig.filterByFields) {
     const values = new Set<string>(); // Use a Set to automatically handle unique values.
     
     // Collect all unique values for the current filter field from all sample items.
-    sampleItems.forEach((item) => {
+    currentSampleItems.forEach((item) => { // Use currentSampleItems
       const fieldValue = item[filterField.key];
       if (Array.isArray(fieldValue)) {
         // If the field value is an array (e.g., tags), add each value to the set.
@@ -144,7 +151,8 @@ export async function getItemBySlug(
 ): Promise<DirectoryItem | undefined> {
   // Simulate API delay.
   await new Promise((resolve) => setTimeout(resolve, 100));
-  return sampleItems.find((item) => item.slug === slug);
+  const currentSampleItems = sampleItems; // Use active sample items
+  return currentSampleItems.find((item) => item.slug === slug); // Use currentSampleItems
 }
 
 /**
@@ -156,16 +164,16 @@ export async function getItemBySlug(
 export async function getAllLocations(): Promise<string[]> {
   // Simulate API delay.
   await new Promise(resolve => setTimeout(resolve, 50));
+  const currentLocations = locations; // Use active locations from @/config
   
-  // Determine the item key to use for extracting location data, based on nicheConfig.
-  // Prefers a field with key 'location', then label 'Location', defaults to 'location'.
-  const locationKey = nicheConfig.itemDefinition.fields.find(
-    f => f.key === "location" || f.label.toLowerCase() === "location"
-  )?.key || "location";
+  // The `locations` export from `@/config` should already be the correct,
+  // niche-specific list of location strings.
+  // If a more complex location object structure were used, this might need adjustment
+  // based on nicheConfig to find the correct display field.
+  // For now, assuming `locations` is string[] as per current setup.
   
   const uniqueLocations = new Set<string>(
-    sampleItems.map(item => item[locationKey]) // Get the value of the determined location key.
-               .filter(Boolean) as string[]    // Filter out any null or undefined values.
+    currentLocations.filter(Boolean) as string[]
   );
-  return Array.from(uniqueLocations).sort(); // Convert Set to a sorted array.
+  return Array.from(uniqueLocations).sort();
 }

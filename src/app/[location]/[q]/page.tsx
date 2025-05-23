@@ -4,7 +4,7 @@ import { getFilterOptions, getAllLocations, searchItems, FilterOption } from "@/
 import { DirectoryItem } from "@/interfaces";
 import { Metadata } from "next";
 import { cache } from "react";
-import { nicheConfig } from "@/niche.config";
+import { nicheConfig } from "@/config"; // Updated import path
 import Link from "next/link"; 
 import { ChevronRight } from "lucide-react"; 
 

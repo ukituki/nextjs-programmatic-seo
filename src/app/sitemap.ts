@@ -1,5 +1,5 @@
 import { getFilterOptions, getAllLocations, searchItems } from "@/lib/data-service"; // Added searchItems
-import { nicheConfig } from "@/niche.config";
+import { nicheConfig } from "@/config"; // Updated import path
 import { MetadataRoute } from "next";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";

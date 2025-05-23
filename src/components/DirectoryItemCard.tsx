@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DirectoryItem } from "@/interfaces";
-import { nicheConfig } from "@/niche.config"; // Import nicheConfig
+import { nicheConfig } from "@/config"; // Updated import path
 import { Clock, MapPin, Phone, Star, StarHalf, Info, Tag, DollarSign, Briefcase } from "lucide-react"; // Added more icons
 import Image from "next/image";
 import Link from "next/link";
