@@ -13,7 +13,7 @@ import DirectoryItemCard from "@/components/DirectoryItemCard";
 import Link from "next/link"; // Added Link
 
 interface ItemPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }> | { slug: string };
 }
 
 /**
@@ -35,8 +35,9 @@ export async function generateStaticParams() {
  * @returns A Promise resolving to Metadata for the page.
  */
 export async function generateMetadata({
-  params,
+  params: paramsInput,
 }: ItemPageProps): Promise<Metadata> {
+  const params = await paramsInput;
   const item = await getItemBySlug(params.slug);
 
   if (!item) {
@@ -138,7 +139,8 @@ const setNestedValue = (
 /**
  * Renders the item detail page.
  */
-export default async function ItemPage({ params }: ItemPageProps) {
+export default async function ItemPage({ params: paramsInput }: ItemPageProps) {
+  const params = await paramsInput;
   const item = await getItemBySlug(params.slug);
 
   if (!item) {

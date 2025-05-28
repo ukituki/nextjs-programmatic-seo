@@ -9,7 +9,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react"; 
 
 interface PageProps {
-  params: Promise<{ location: string; q: string; }>;
+  params: Promise<{ location: string; q: string; }> | { location: string; q: string; };
 }
 
 export const revalidate = 86400;

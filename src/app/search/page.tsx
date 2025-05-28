@@ -7,11 +7,12 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 interface PageProps {
-  searchParams: { q?: string; location?: string }; // searchParams are not a Promise here
+  searchParams: Promise<{ q?: string; location?: string } | { q?: string; location?: string }>;
 }
 
-export default async function Page({ searchParams }: PageProps) {
-  const { q, location } = searchParams; // Directly access searchParams
+export default async function Page({ searchParams: searchParamsInput }: PageProps) {
+  const searchParams = await searchParamsInput; // Await the searchParams prop
+  const { q, location } = searchParams;
 
   if (!q) redirect("/");
 

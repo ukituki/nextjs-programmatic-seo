@@ -68,7 +68,7 @@ export const sampleEventItems: DirectoryItem[] = [
     organizer: "Miami Foodies United",
     // coverImage property removed
     name: "Miami Food Truck Rally",
-    image: "https://images.unsplash.com/photo-1576642028089-679c89809249?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    image: "https://images.unsplash.com/photo-1581022099343-82535654571f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
   },
   {
     id: "event5",

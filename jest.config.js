@@ -19,6 +19,10 @@ const customJestConfig = {
     // Add other aliases here if used in files being tested
   },
   preset: 'ts-jest', // Use ts-jest preset
+  transformIgnorePatterns: [
+    "/node_modules/(?!lucide-react)/", 
+    "^.+\\.module\\.(css|sass|scss)$"
+  ],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
