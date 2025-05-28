@@ -1,6 +1,5 @@
 // src/app/item/[slug]/page.tsx
 import { getItemBySlug, searchItems } from "@/lib/data-service";
-import { DirectoryItem } from "@/interfaces";
 import { nicheConfig } from "@/config"; // Updated import path
 import { Metadata } from "next";
 import Image from "next/image";
@@ -107,20 +106,31 @@ function StarRating({ rating, starClasses = "h-5 w-5", containerClasses = "flex 
 /**
  * Helper function to set nested properties within a JSON-LD object.
  */
-const setNestedValue = (obj: any, path: string, value: any) => {
+const setNestedValue = (
+  obj: Record<string, unknown>,
+  path: string,
+  value: unknown
+) => {
   const keys = path.split('.');
-  let current = obj;
+  let current: Record<string, unknown> = obj;
   keys.forEach((key, index) => {
-    if (index === keys.length - 1) { 
+    if (index === keys.length - 1) {
       current[key] = value;
-    } else { 
+    } else {
       if (!current[key] || typeof current[key] !== 'object') {
         if (key === 'address') current[key] = { "@type": "PostalAddress" };
         else if (key === 'aggregateRating') current[key] = { "@type": "AggregateRating" };
         else if (key === 'offers') current[key] = { "@type": "Offer" };
-        else current[key] = {}; 
+        else current[key] = {};
       }
-      current = current[key]; 
+      // Ensure current[key] is treated as a Record<string, unknown> for the next iteration
+      if (typeof current[key] === 'object' && current[key] !== null) {
+        current = current[key] as Record<string, unknown>;
+      } else {
+        // This case should ideally not be reached if the logic to create objects works correctly
+        current[key] = {}; // Create an empty object if it's not an object
+        current = current[key] as Record<string, unknown>;
+      }
     }
   });
 };
@@ -152,7 +162,56 @@ export default async function ItemPage({ params }: ItemPageProps) {
   const locationEncoded = itemLocation ? encodeURIComponent(itemLocation) : null;
   const categoryEncoded = itemCategory ? encodeURIComponent(itemCategory) : null;
   
-  let jsonLdData: any = null;
+// Define interfaces for common JSON-LD structures
+interface JsonLdAddress {
+  "@type": "PostalAddress";
+  streetAddress?: string;
+  addressLocality?: string;
+  addressRegion?: string;
+  postalCode?: string;
+  addressCountry?: string;
+}
+
+interface JsonLdGeoCoordinates {
+  "@type": "GeoCoordinates";
+  latitude?: string | number;
+  longitude?: string | number;
+}
+
+interface JsonLdAggregateRating {
+  "@type": "AggregateRating";
+  ratingValue?: string | number;
+  reviewCount?: string | number;
+  bestRating?: string | number;
+  worstRating?: string | number;
+}
+
+interface JsonLdOffer {
+  "@type": "Offer";
+  price?: string | number;
+  priceCurrency?: string;
+  availability?: string; 
+  validFrom?: string; 
+  itemOffered?: JsonLdBase; 
+}
+
+// Base interface for any schema.org entity
+interface JsonLdBase {
+  "@context": "https://schema.org";
+  "@type": string;
+  "@id"?: string;
+  name?: string;
+  description?: string;
+  url?: string;
+  image?: string | { "@type": "ImageObject"; url: string; contentUrl?: string; }[];
+  address?: JsonLdAddress | string; 
+  geo?: JsonLdGeoCoordinates;
+  aggregateRating?: JsonLdAggregateRating;
+  offers?: JsonLdOffer | JsonLdOffer[];
+  [key: string]: unknown; // Allow other properties, but encourage specific typing
+}
+
+  let jsonLdData: JsonLdBase | null = null;
   if (nicheConfig.schemaOrg && item) {
     jsonLdData = {
       "@context": "https://schema.org",

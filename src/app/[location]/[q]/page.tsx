@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import DirectoryItemCard from "@/components/DirectoryItemCard";
-import { getFilterOptions, getAllLocations, searchItems, FilterOption } from "@/lib/data-service";
+import { getFilterOptions, getAllLocations, searchItems } from "@/lib/data-service";
 import { DirectoryItem } from "@/interfaces";
 import { Metadata } from "next";
 import { cache } from "react";
@@ -9,10 +9,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react"; 
 
 interface PageProps {
-  params: { 
-    location: string; 
-    q: string;
-  };
+  params: Promise<{ location: string; q: string; }>;
 }
 
 export const revalidate = 86400;
@@ -57,8 +54,9 @@ export async function generateStaticParams() {
 const getItems = cache(searchItems);
 
 export async function generateMetadata({
-  params,
+  params: paramsPromise,
 }: PageProps): Promise<Metadata> {
+  const params = await paramsPromise;
   const { q, location } = params;
   const qDecoded = decodeURIComponent(q); 
   const locationDecoded = decodeURIComponent(location); 
@@ -92,7 +90,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params: paramsPromise }: PageProps) {
+  const params = await paramsPromise;
   const { q, location } = params;
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);

@@ -49,6 +49,7 @@ export const sampleRestaurantItems: DirectoryItem[] = [ // Renamed from sampleIt
     price: "$",
     cuisine: "Mexican",
     address: "2234 Mission St, San Francisco, CA",
+    description: "Authentic Mexican street tacos in the heart of the Mission district.",
     location: "San Francisco, CA",
     phone: "(415) 777-8888",
     hours: "10:00 AM - 10:00 PM",
@@ -123,7 +124,7 @@ export const sampleRestaurantItems: DirectoryItem[] = [ // Renamed from sampleIt
     reviews: 234,
     tags: ["Lunch", "Dinner", "Sushi Bars"],
     category: "Japanese",
-    website: "www.sushimasterchicago.com" // Note: website seems to be for a Chicago restaurant
+    website: "www.sakurasf.com"
   },
   {
     id: 20,

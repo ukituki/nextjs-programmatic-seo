@@ -1,5 +1,7 @@
 import { NicheConfig } from "./niche.config.base";
-import { Calendar, MapPin, Ticket, Users, Info, DollarSign, Link as LinkIcon, Image as ImageIcon } from "lucide-react"; // Added ImageIcon
+import { Calendar, MapPin, Users, Info, DollarSign, Link as LinkIcon, Image as ImageIcon } from "lucide-react"; // Removed Ticket
+
+export const eventsNicheConfig: NicheConfig = {
   nicheNameSingular: "Local Event",
   nicheNamePlural: "Local Events",
   itemDisplayNameKey: "eventName",
@@ -7,7 +9,7 @@ import { Calendar, MapPin, Ticket, Users, Info, DollarSign, Link as LinkIcon, Im
     fields: [
       { key: "eventName", label: "Event Name", isSearchable: true, displayInCard: true, displayInDetail: true, icon: Calendar },
       { key: "eventDate", label: "Date", displayInCard: true, displayInDetail: true, icon: Calendar }, // Consider date formatting
-      { key: "venueName", label: "Venue", isSearchable: true, displayInCard: true, displayInDetail: true, icon: MapPin },
+      { key: "venueName", label: "Venue", isSearchable: true, isFilterable: true, displayInCard: true, displayInDetail: true, icon: MapPin },
       { key: "address", label: "Address", isSearchable: true, displayInDetail: true, icon: MapPin },
       // 'location' field will be used for city/region for filtering. It's also in DirectoryItem by default.
       { key: "category", label: "Category", isSearchable: true, isFilterable: true, displayInCard: true, displayInDetail: true, icon: Info },

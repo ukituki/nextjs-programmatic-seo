@@ -1,5 +1,5 @@
 import { NicheConfig } from "./niche.config.base"; // Updated import path
-import { Users, BookOpen, Tag, Filter, Search, Calendar, Landmark, Edit } from "lucide-react"; // Example icons
+import { Users, BookOpen, Tag, Calendar, Landmark } from "lucide-react"; // Example icons
 
 export const booksNicheConfig: NicheConfig = {
   nicheNameSingular: "Book",
@@ -9,10 +9,10 @@ export const booksNicheConfig: NicheConfig = {
     fields: [
       { key: "title", label: "Title", isSearchable: true, displayInCard: true, displayInDetail: true, icon: BookOpen },
       { key: "author", label: "Author", isSearchable: true, isFilterable: true, displayInCard: true, displayInDetail: true, icon: Users },
-      { key: "coverImage", label: "Cover", displayInCard: true, displayInDetail: true }, // Will be handled as an image
+      { key: "image", label: "Cover Image", displayInCard: true, displayInDetail: true }, // Will be handled as an image
       { key: "genre", label: "Genre", isSearchable: true, isFilterable: true, displayInCard: true, displayInDetail: true, icon: Tag },
       { key: "publicationYear", label: "Year", isFilterable: true, displayInDetail: true, icon: Calendar },
-      { key: "isbn", label: "ISBN", displayInDetail: true },
+      { key: "isbn", label: "ISBN", displayInDetail: true, isSearchable: true },
       { key: "publisher", label: "Publisher", displayInDetail: true, icon: Landmark },
       { key: "summary", label: "Summary", isSearchable: true, displayInCard: false, displayInDetail: true }, // Too long for card
       { key: "pageCount", label: "Pages", displayInDetail: true },
@@ -41,7 +41,7 @@ export const booksNicheConfig: NicheConfig = {
     propertyMappings: [
       { itemKey: "title", schemaProperty: "name" },
       { itemKey: "author", schemaProperty: "author.name" }, // Assuming author is a string, nest under Person object if structured
-      { itemKey: "coverImage", schemaProperty: "image" },
+      { itemKey: "image", schemaProperty: "image" },
       { itemKey: "isbn", schemaProperty: "isbn" },
       { itemKey: "publicationYear", schemaProperty: "datePublished" },
       { itemKey: "publisher", schemaProperty: "publisher.name" },

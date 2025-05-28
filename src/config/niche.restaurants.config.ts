@@ -47,7 +47,7 @@ export const restaurantsNicheConfig: NicheConfig = {
   },
   searchConfig: {
     // Fields from 'itemDefinition' that the main search bar will query against.
-    searchableFields: ["name", "cuisine", "tags", "category", "description"],
+    searchableFields: ["name", "cuisine", "tags", "category", "description", "location", "address"],
     primarySearchPlaceholder: "Search for cuisine, restaurant, or dish",
     locationSearchable: true, // Enable the location search input.
     locationSearchPlaceholder: "Enter your city or neighborhood",

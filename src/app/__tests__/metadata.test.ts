@@ -5,15 +5,17 @@ import { DirectoryItem } from '@/interfaces';
 import { generateMetadata as generateItemMetadata } from '../item/[slug]/page'; 
 import { generateMetadata as generateSearchMetadata } from '../[location]/[q]/page'; // Import search page metadata
 
+import { getItemBySlug, searchItems, getAllLocations, getFilterOptions } from '@/lib/data-service';
+
 // Mock the data-service module
-const mockDataService = {
+// Note: activeLocations is available here due to hoisting of imports
+jest.mock('@/lib/data-service', () => ({
+  __esModule: true,
   getItemBySlug: jest.fn(),
   searchItems: jest.fn(),
-  getAllLocations: jest.fn().mockResolvedValue(activeLocations), // Default mock
-  getFilterOptions: jest.fn().mockResolvedValue([]), // Default mock
-};
-jest.mock('@/lib/data-service', () => mockDataService);
-
+  getAllLocations: jest.fn().mockResolvedValue(activeLocations), 
+  getFilterOptions: jest.fn().mockResolvedValue([]),
+}));
 
 const currentSampleItems = activeSampleItems as DirectoryItem[]; // Restaurants by default
 const currentLocations = activeLocations; // Restaurant locations by default
@@ -22,11 +24,11 @@ describe('Metadata Generation', () => {
   
   beforeEach(() => {
     // Reset mocks before each test
-    mockDataService.getItemBySlug.mockReset();
-    mockDataService.searchItems.mockReset();
+    (getItemBySlug as jest.Mock).mockReset();
+    (searchItems as jest.Mock).mockReset();
     // Reset other mocks if they are modified within tests
-    mockDataService.getAllLocations.mockResolvedValue(currentLocations);
-    mockDataService.getFilterOptions.mockResolvedValue([]);
+    (getAllLocations as jest.Mock).mockResolvedValue(currentLocations);
+    (getFilterOptions as jest.Mock).mockResolvedValue([]);
   });
 
   describe('Item Detail Page (/item/[slug]/page.tsx)', () => {
@@ -36,7 +38,7 @@ describe('Metadata Generation', () => {
         return;
       }
       const item = currentSampleItems[0]; 
-      mockDataService.getItemBySlug.mockResolvedValue(item);
+      (getItemBySlug as jest.Mock).mockResolvedValue(item);
 
       const params = { slug: item.slug };
       const metadata = await generateItemMetadata({ params });
@@ -73,7 +75,7 @@ describe('Metadata Generation', () => {
     });
 
     it('should generate "not found" metadata if item is not found', async () => {
-      mockDataService.getItemBySlug.mockResolvedValue(undefined);
+      (getItemBySlug as jest.Mock).mockResolvedValue(undefined);
       const params = { slug: 'non-existent-slug' };
       const metadata = await generateItemMetadata({ params });
 
@@ -88,7 +90,7 @@ describe('Metadata Generation', () => {
       const testQuery = "Sushi"; // A typical query
       const mockResults = currentSampleItems.filter(item => item.name.toLowerCase().includes(testQuery.toLowerCase())).slice(0,3);
       
-      mockDataService.searchItems.mockResolvedValue(mockResults);
+      (searchItems as jest.Mock).mockResolvedValue(mockResults);
 
       // Params should be URL-encoded as Next.js would provide them
       const params = { 
@@ -118,7 +120,7 @@ describe('Metadata Generation', () => {
       const testLocation = currentLocations.length > 0 ? currentLocations[0] : "Testville, ST";
       const mockResults = currentSampleItems.slice(0,5); // Simulate some items being returned
       
-      mockDataService.searchItems.mockResolvedValue(mockResults);
+      (searchItems as jest.Mock).mockResolvedValue(mockResults);
 
       // Params for "all-items"
       const params = { 
@@ -138,7 +140,7 @@ describe('Metadata Generation', () => {
     it('should handle cases where searchItems returns empty results for a standard query', async () => {
         const testLocation = currentLocations.length > 0 ? currentLocations[0] : "Testville, ST";
         const testQuery = "NonExistentThing";
-        mockDataService.searchItems.mockResolvedValue([]); // No items found
+        (searchItems as jest.Mock).mockResolvedValue([]); // No items found
 
         const params = {
             location: encodeURIComponent(testLocation),

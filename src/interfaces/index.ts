@@ -9,5 +9,5 @@ export interface DirectoryItem {
   address?: string;
   location?: string; // e.g., "City, State" or a more generic zone
   // Allow for arbitrary other properties specific to the niche
-  [key: string]: any; // For custom properties
+  [key: string]: unknown; // For custom properties - more type-safe
 }
