@@ -1,4 +1,3 @@
-import banner from "@/assets/restaurant-banner.jpg"; // Assuming a generic banner
 import Header from "@/components/Header";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,7 +10,11 @@ export default async function Home() {
   // Fetch data for new sections
   const filterOptions = await getFilterOptions({});
   const featuredItems: DirectoryItem[] = (await searchItems("", "")).slice(0, 4);
-  
+
+  const bannerImageSrc = nicheConfig.assets?.homeBannerImage && nicheConfig.assets.homeBannerImage.trim() !== ""
+    ? nicheConfig.assets.homeBannerImage
+    : "/images/placeholder-banner.png"; // Default placeholder
+
   let locations: string[] = [];
   if (nicheConfig.searchConfig.locationSearchable) {
     locations = (await getAllLocations()).slice(0, 5);
@@ -36,8 +39,8 @@ export default async function Home() {
         {/* Existing Banner Section */}
         <div className="relative h-96 w-full">
           <Image
-            src={banner}
-            alt={`${nicheConfig.nicheNamePlural} Finder`}
+            src={bannerImageSrc}
+            alt={`Banner for ${nicheConfig.nicheNamePlural}`}
             fill
             className="rounded-lg object-cover"
             priority // Added priority for LCP

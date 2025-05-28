@@ -53,4 +53,11 @@ export const eventsNicheConfig: NicheConfig = {
       // { itemKey: "organizer", schemaProperty: "organizer.name" }, // If organizer is a string
     ],
   },
+  assets: {
+    // No specific assets defined for events yet
+  },
+  theme: {
+    primaryColor: "#FFD700",
+    secondaryColor: "#8A2BE2",
+  },
 };

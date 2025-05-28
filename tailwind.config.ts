@@ -8,9 +8,13 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-  	extend: {
-  		colors: {
-  			background: 'hsl(var(--background))',
+    extend: {
+      fontFamily: {
+        // Ensure --font-sans (set in layout.tsx including custom font + Geist) is primary
+        sans: ['var(--font-sans)', 'Geist', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
@@ -21,12 +25,14 @@ export default {
   				foreground: 'hsl(var(--popover-foreground))'
   			},
   			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
+          // Updated to use the new H, S, L CSS variables
+  				DEFAULT: 'hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l))',
+  				foreground: 'hsl(var(--primary-foreground))' // Assuming foreground remains compatible or is also themed
   			},
   			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
+          // Updated to use the new H, S, L CSS variables
+  				DEFAULT: 'hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l))',
+  				foreground: 'hsl(var(--secondary-foreground))' // Assuming foreground remains compatible or is also themed
   			},
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',

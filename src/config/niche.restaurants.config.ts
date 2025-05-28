@@ -96,4 +96,11 @@ export const restaurantsNicheConfig: NicheConfig = {
       // { itemKey: "longitude", schemaProperty: "geo.longitude", isGeoCoordinates: true },
     ],
   },
+  assets: {
+    homeBannerImage: "/assets/restaurant-banner.jpg",
+  },
+  theme: {
+    primaryColor: "#A0522D",
+    secondaryColor: "#F4A460",
+  },
 };

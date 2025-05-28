@@ -84,4 +84,19 @@ export interface NicheConfig {
       isGeoCoordinates?: boolean;
     }>;
   };
+
+  /** Optional configuration for assets like images and logos. */
+  assets?: {
+    homeBannerImage?: string;
+    logo?: string;
+    defaultSocialImage?: string;
+  };
+
+  /** Optional configuration for theme customization. */
+  theme?: {
+    primaryColor?: string;
+    secondaryColor?: string;
+    accentColor?: string;
+    fontFamily?: string;
+  };
 }

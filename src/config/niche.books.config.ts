@@ -50,4 +50,11 @@ export const booksNicheConfig: NicheConfig = {
       { itemKey: "genre", schemaProperty: "genre" },
     ],
   },
+  assets: {
+    // No specific assets defined for books yet
+  },
+  theme: {
+    primaryColor: "#0047AB",
+    secondaryColor: "#E0E0E0",
+  },
 };
