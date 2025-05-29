@@ -1,4 +1,5 @@
 // src/config/niche.config.base.ts
+import { FormDefinition } from "../interfaces/forms";
 
 /**
  * Defines the overall configuration for the directory niche.
@@ -99,4 +100,7 @@ export interface NicheConfig {
     accentColor?: string;
     fontFamily?: string;
   };
+
+  /** Optional configuration for lead generation forms associated with the niche. */
+  leadGenForm?: FormDefinition;
 }

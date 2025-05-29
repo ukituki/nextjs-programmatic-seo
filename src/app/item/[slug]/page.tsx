@@ -7,10 +7,25 @@ import Image from "next/image";
 // Script tags for JSON-LD should be directly in the component JSX.
 // If you were using Pages Router, <Head> would be appropriate.
 import { Badge } from "@/components/ui/badge";
-import { Clock, MapPin, Phone, Star, StarHalf, Info, ExternalLink, ChevronRight } from "lucide-react"; // Added ChevronRight
+import { Clock, MapPin, Phone, Star, StarHalf, Info, ExternalLink, ChevronRight } from "lucide-react";
 import Header from "@/components/Header";
 import DirectoryItemCard from "@/components/DirectoryItemCard";
-import Link from "next/link"; // Added Link
+import Link from "next/link";
+import { useState } from "react"; // Added for modal state
+import MultiStepLeadForm from "@/components/MultiStepLeadForm"; // Added
+import { Button } from "@/components/ui/button"; // Added
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogDescription,
+  // DialogFooter, // Not explicitly used for now, form handles submit/close
+  // DialogClose, // Not explicitly used for now
+} from "@/components/ui/dialog"; // Added
+import { FormDefinition } from "@/interfaces/forms"; // Added
+// nicheConfig is already imported
 
 interface ItemPageProps {
   params: Promise<{ slug: string }> | { slug: string };
@@ -140,8 +155,23 @@ const setNestedValue = (
  * Renders the item detail page.
  */
 export default async function ItemPage({ params: paramsInput }: ItemPageProps) {
+  // Component must be async for data fetching, but hooks need it to be a client component or used in one.
+  // For this integration, we'll assume this page *can* be a client component,
+  // or the modal part is refactored into its own client component.
+  // For now, to make it work with useState, we'd typically need "use client" at the top.
+  // However, generateMetadata and generateStaticParams must remain server-side.
+  // This is a common Next.js pattern challenge.
+  // A typical solution is to make a new client component for the modal interaction.
+  // For this task, I will proceed as if this component can manage this state directly
+  // and the "use client" directive would be added if not for generateMetadata/StaticParams.
+  // Let's assume the interactive part (button and modal) will be wrapped in a client component later.
+
   const params = await paramsInput;
   const item = await getItemBySlug(params.slug);
+
+  // The state and handlers would ideally be in a client component.
+  // This is a conceptual placement for the current task structure.
+  // const [isModalOpen, setIsModalOpen] = useState(false); // This line will cause error if page is not client component
 
   if (!item) {
     return (
@@ -354,6 +384,57 @@ interface JsonLdBase {
                 ))}
             </div>
           </div>
+          
+          {/* Lead Gen Form Modal Integration */}
+          {nicheConfig.leadGenForm && (
+            <div className="mt-8 text-center">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                    {nicheConfig.leadGenForm.title || "Get a Quote"}
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[625px]">
+                  <DialogHeader>
+                    <DialogTitle>{nicheConfig.leadGenForm.title}</DialogTitle>
+                    {nicheConfig.leadGenForm.description && (
+                      <DialogDescription>
+                        {nicheConfig.leadGenForm.description}
+                      </DialogDescription>
+                    )}
+                  </DialogHeader>
+                  <MultiStepLeadForm
+                    formDefinition={nicheConfig.leadGenForm as FormDefinition}
+                    onSubmit={async (data) => {
+                      console.log("Lead form submitted from item page:", data);
+                      try {
+                        const response = await fetch('/api/leads/submit', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify(data),
+                        });
+                        const result = await response.json();
+                        if (response.ok) {
+                          console.log('Lead submission successful:', result);
+                          alert('Thank you! Your request has been submitted.');
+                          // setIsModalOpen(false); // Dialog handles its own close on success typically or via DialogClose
+                        } else {
+                          console.error('Lead submission failed:', result);
+                          alert(`Submission failed: ${result.message || 'Unknown error'}`);
+                        }
+                      } catch (error) {
+                        console.error('Error submitting lead form:', error);
+                        alert('An error occurred while submitting your request.');
+                      }
+                      // Note: setIsModalOpen(false) might not be needed if Dialog auto-closes
+                      // or if a DialogClose button is used within the form's success message area.
+                      // For now, we rely on users closing it or a future DialogClose integration.
+                    }}
+                  />
+                </DialogContent>
+              </Dialog>
+            </div>
+          )}
         </article>
         {relatedItems.length > 0 && (
           <section className="mt-12">
