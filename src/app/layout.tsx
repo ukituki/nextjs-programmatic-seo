@@ -51,6 +51,8 @@ const hexToHsl = (hex: string): { h: number; s: number; l: number } | null => {
 };
 
 
+import ClientOnly from "@/components/ClientOnly"; // Import ClientOnly
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -101,7 +103,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
+        <ClientOnly>
+          <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
+        </ClientOnly>
       </head>
       {/* Use geistSans.variable for the main font setup, which includes --font-geist-sans */}
       {/* The custom font (if any) is prepended via --font-sans in the <style> block */}

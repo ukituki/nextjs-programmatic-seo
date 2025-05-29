@@ -1,0 +1,81 @@
+Product Name: Apple iPhone 16 Pro
+Description: The ultimate iPhone. Forged in titanium, features Apple Intelligence, A18 Pro chip, advanced camera system with Camera Control and 5x Telephoto, and long battery life (up to 33 hours video playback on Pro Max).
+Features:
+- Apple Intelligence: AI-powered writing tools, Genmoji, enhanced Siri, Private Cloud Compute for privacy.
+- Cameras: Pro camera system, 48MP Fusion camera, 5x Telephoto, 48MP Ultra Wide, Visual intelligence, Camera Control, Cinematic mode, Action mode, 4K 120 fps Dolby Vision.
+- Chip: A18 Pro chip with 6-core GPU.
+- Battery: Up to 33 hours video playback (Pro Max). USB-C charging, MagSafe.
+- Design: Titanium, Dynamic Island, Ceramic Shield, water/splash resistant.
+- Environment: Recycled materials, Apple Trade In, fiber-based packaging.
+- Privacy: On-device processing, Passwords app, Private Browsing, iMessage encryption, Apple Pay.
+- Customization: Lock Screen controls, Action button, Home Screen tinting, Eye Tracking.
+- Safety: Satellite connectivity, Find My, Check In.
+- Durability: Holds value, Ceramic Shield.
+
+Product Name: Apple iPhone 16
+Description: A total powerhouse. Features Apple Intelligence, A18 chip, advanced dual-camera system with Camera Control, and long battery life (up to 27 hours video playback).
+Features:
+- Apple Intelligence: AI-powered writing tools, Genmoji, enhanced Siri, Private Cloud Compute for privacy.
+- Cameras: Advanced dual-camera system, 48MP Fusion camera, 2x Telephoto, 12MP Ultra Wide, Visual intelligence, Camera Control, Cinematic mode, Action mode.
+- Chip: A18 chip with 5-core GPU.
+- Battery: Up to 27 hours video playback. USB-C charging, MagSafe.
+- Design: Aerospace-grade aluminum, Dynamic Island, Ceramic Shield, water/splash resistant.
+- Environment: Recycled materials, Apple Trade In, fiber-based packaging.
+- Privacy: On-device processing, Passwords app, Private Browsing, iMessage encryption, Apple Pay.
+- Customization: Lock Screen controls, Action button, Home Screen tinting, Eye Tracking.
+- Safety: Satellite connectivity, Find My, Check In.
+- Durability: Holds value, Ceramic Shield.
+
+Product Name: Apple iPhone 16e
+Description: Latest iPhone. Greatest price. Features Apple Intelligence, A18 chip, 2-in-1 camera system, and good battery life (up to 26 hours video playback).
+Features:
+- Apple Intelligence: AI-powered writing tools, Genmoji, enhanced Siri, Private Cloud Compute for privacy.
+- Cameras: 2-in-1 camera system, 48MP Fusion camera, 2x Telephoto, Visual intelligence, Audio Mix. (No Camera Control explicitly mentioned for 16e in the summary table, but general camera section implies it for new models).
+- Chip: A18 chip with 4-core GPU.
+- Battery: Up to 26 hours video playback. USB-C charging, MagSafe.
+- Design: Ceramic Shield, water/splash resistant. (Specific material like aluminum/titanium not highlighted in summary table for 16e but implied durable).
+- Environment: Recycled materials, Apple Trade In, fiber-based packaging.
+- Privacy: On-device processing, Passwords app, Private Browsing, iMessage encryption, Apple Pay.
+- Customization: Lock Screen controls, Home Screen tinting, Eye Tracking. (Action button not explicitly mentioned for 16e).
+- Safety: Satellite connectivity, Find My, Check In.
+- Durability: Holds value, Ceramic Shield.
+
+Product Name: Apple iPhone 15
+Description: As amazing as ever. Features A16 Bionic chip, dual-camera system, and good battery life (up to 26 hours video playback).
+Features:
+- Cameras: Dual-camera system, 48MP Main camera, 2x Telephoto, Ultra Wide camera. Cinematic mode, Action mode.
+- Chip: A16 Bionic chip with 5-core GPU.
+- Battery: Up to 26 hours video playback. USB-C charging, MagSafe.
+- Design: Dynamic Island, Ceramic Shield, water/splash resistant.
+- Environment: Recycled materials, Apple Trade In, fiber-based packaging.
+- Privacy: Passwords app, Private Browsing, iMessage encryption, Apple Pay. (Apple Intelligence not available).
+- Customization: Lock Screen controls, Home Screen tinting.
+- Safety: Satellite connectivity, Find My, Check In.
+- Durability: Holds value, Ceramic Shield.
+
+Product Name: Samsung Galaxy S24 Ultra
+Description: Sold out on the website. The page redirects to the Galaxy S25 Ultra, mentioning it as "the next evolution of Galaxy AI". This suggests the S24 Ultra likely also featured Galaxy AI. No further specific S24 Ultra features or detailed descriptions are available on the provided page.
+Features:
+- Galaxy AI (inferred)
+- Other features and detailed specifications are not available on the direct product page due to it being sold out.
+
+Product Name: Google Pixel 8 Pro
+Description: "The wow of Google. The whoa of pro." A powerful, personal Pixel with advanced AI capabilities.
+Features:
+- Display: 6.7" Super Actua display (1-120Hz, up to 2400 nits peak brightness), scratch-resistant glass.
+- Processor: Google Tensor G3 chip with Google AI.
+- RAM: 12 GB.
+- Battery: 5050 mAh, 24+ hour life, fast wireless charging, Battery Share.
+- Cameras:
+    - Main: 50 MP (ƒ/1.68, 2x optical-quality zoom, low-light).
+    - Ultrawide: 48 MP (improved Macro Focus, astrophotography).
+    - Telephoto: 48 MP (5x optical zoom, up to 30x Super Res Zoom).
+    - Front: 10.5 MP (ultrawide, autofocus).
+    - Pro controls, Night Sight, Astrophotography.
+    - Video: Video Boost, Night Sight Video, Real Tone.
+- AI Editing: Magic Editor, Best Take, Audio Magic Eraser.
+- Google AI: Circle to search, Gemini Nano (on-device AI), Live Translate (49 languages), Call Screen, Google Assistant (summarize, read aloud, translate, voice typing), Immersive View (Maps), Gmail assistance.
+- Security: Crisis alerts, Tensor G3 & Titan M2 chip, VPN by Google, 7 years of OS/security updates & Feature Drops, car crash detection.
+- Thermometer App: Body and object temperature readings (saved to Fitbit).
+- Design: Polished aluminum frame, matte back glass.
+- What's in the box: Cable, Quick Start Guide, Quick Switch Adapter, SIM tool (charger sold separately).
