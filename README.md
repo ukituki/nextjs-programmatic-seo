@@ -331,3 +331,26 @@ export const sampleItems: DirectoryItem[] = [
 
 This template was originally based on concepts from a YouTube tutorial by [Insert Creator/Channel Name Here if applicable, or remove this section]. It has since been significantly refactored and expanded to serve as a general-purpose directory template.
 *(If not based on a tutorial, this section can be removed or repurposed for other acknowledgements.)*
+
+## New Features
+
+### Lead Generation Forms
+
+This application now includes a customizable lead generation system.
+- **Configuration**: Lead forms are defined within each niche's configuration file (e.g., `src/config/niche.doors-windows.config.ts` under the `leadGenForm` key). This allows for different forms (steps, fields, field types, basic validation) per niche.
+- **API Endpoint**: Submitted lead data is sent to `/api/leads/submit`. Currently, this endpoint logs the received data to the server console. Future development will include database storage and a lead management interface.
+- **Frontend**: The form is rendered dynamically by the `MultiStepLeadForm.tsx` component and displayed in a modal on item detail pages when a `leadGenForm` is configured for the active niche.
+
+### AI Q&A Proof of Concept (PoC)
+
+An initial exploration into AI capabilities has been added:
+- **API Endpoint**: `/api/ai/qa` accepts a user's question (prompt) via a POST request. It uses the Vercel AI SDK (currently configured with OpenAI `gpt-3.5-turbo` as an example) to generate an answer. A system prompt guides the AI to answer questions related to the website's niche (e.g., doors and windows).
+- **Frontend Component**: `src/components/AiQaPoc.tsx` provides a simple UI to ask a question and display the AI's response. This component can be integrated where needed. *(Note: This component is not yet integrated into any specific page by default).*
+
+### Content Guides & Structured Data
+
+The application now supports dedicated content guide pages with enhanced SEO.
+- **Example Guide**: An example article, "The Ultimate Guide to Choosing Energy-Efficient Windows," has been implemented at `/guides/energy-efficient-windows`.
+- **Structured Data**: This example page includes JSON-LD structured data for `Article` schema (including an embedded `FAQPage` if applicable) to improve search engine understanding and visibility. This pattern can be used for future content.
+
+---
