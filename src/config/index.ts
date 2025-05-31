@@ -2,12 +2,14 @@ import { NicheConfig } from './niche.config.base';
 import { restaurantsNicheConfig } from './niche.restaurants.config';
 import { booksNicheConfig } from './niche.books.config';
 import { eventsNicheConfig } from './niche.events.config'; // Import events config
+import { windowsAndDoorsConfig } from './niche.windowsanddoors.config'; // Import windows and doors config
 import { DirectoryItem } from '@/interfaces';
 import { sampleRestaurantItems, restaurantLocations } from '@/data/sample-data-restaurants';
 import { sampleBookItems, bookLocations } from '@/data/sample-data-books';
 import { sampleEventItems, eventLocations } from '@/data/sample-data-events'; // Import events data
+import { sampleWindowsAndDoorsItems, windowsAndDoorsLocations } from '@/data/sample-data-windowsanddoors'; // Import windows and doors data
 
-// Default to 'restaurants'. Can be 'books', 'events', etc.
+// Default to 'restaurants'. Can be 'books', 'events', 'windowsanddoors', etc.
 const activeNicheName = process.env.NEXT_PUBLIC_ACTIVE_NICHE || 'restaurants'; 
 
 let activeConfig: NicheConfig;
@@ -24,6 +26,11 @@ if (activeNicheName === 'books') {
   activeSampleItems = sampleEventItems;
   activeLocations = eventLocations;
   console.log("Activating EVENTS niche.");
+} else if (activeNicheName === 'windowsanddoors') {
+  activeConfig = windowsAndDoorsConfig;
+  activeSampleItems = sampleWindowsAndDoorsItems;
+  activeLocations = windowsAndDoorsLocations;
+  console.log("Activating WINDOWS AND DOORS niche.");
 } else { // Default to restaurants
   activeConfig = restaurantsNicheConfig;
   activeSampleItems = sampleRestaurantItems;

@@ -5,6 +5,7 @@ import { getAllLocations, searchItems } from "@/lib/data-service"; // Updated im
 import { DirectoryItem } from "@/interfaces"; // Added for type
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import { nicheConfig } from "@/config"; // Added for ItemList schema
 
 interface PageProps {
   searchParams: Promise<{ q?: string; location?: string } | { q?: string; location?: string }>;
@@ -43,17 +44,61 @@ interface ResultsProps {
 async function Results({ q, location }: ResultsProps) {
   const results: DirectoryItem[] = await searchItems(q, location); // Updated function call
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
+  const itemListElements = results.map((item, index) => {
+    const itemName = item[nicheConfig.itemDisplayNameKey] || item.name || "Unnamed Item";
+    const itemSchema: any = {
+      "@type": nicheConfig.schemaOrg?.type || "Thing", // Fallback to "Thing"
+      "@id": `${baseUrl}/item/${item.slug}`,
+      name: itemName,
+      description: item.description || `Details for ${itemName}`, // Fallback description
+      image: item.image || undefined, // Include image only if available
+    };
+
+    // Optionally add a few simple properties from propertyMappings
+    // For example, if 'brand' or 'material' are defined and simple strings
+    nicheConfig.schemaOrg?.propertyMappings?.forEach(mapping => {
+      if (item[mapping.itemKey] && (mapping.schemaProperty === "brand.name" || mapping.schemaProperty === "brand" || mapping.schemaProperty === "material")) {
+        if (mapping.schemaProperty === "brand.name" || mapping.schemaProperty === "brand") {
+            itemSchema.brand = { "@type": "Brand", name: item[mapping.itemKey] };
+        } else if (mapping.schemaProperty === "material") {
+            itemSchema.material = item[mapping.itemKey];
+        }
+      }
+    });
+
+
+    return {
+      "@type": "ListItem",
+      position: index + 1,
+      item: itemSchema,
+    };
+  });
+
+  const jsonLdItemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: itemListElements,
+  };
+
   return (
-    <main className="container mx-auto space-y-8 px-4 py-8">
-      <p className="text-center font-semibold">
-        Showing {results.length} results for {`"${q}"`}{location ? ` near ${location}` : ""}
-      </p>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {results.map((item) => ( // Updated variable name and prop
-          <DirectoryItemCard key={item.id} item={item} />
-        ))}
-      </div>
-    </main>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdItemList) }}
+      />
+      <main className="container mx-auto space-y-8 px-4 py-8">
+        <p className="text-center font-semibold">
+          Showing {results.length} results for {`"${q}"`}{location ? ` near ${location}` : ""}
+        </p>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {results.map((item) => ( // Updated variable name and prop
+            <DirectoryItemCard key={item.id} item={item} />
+          ))}
+        </div>
+      </main>
+    </>
   );
 }
 

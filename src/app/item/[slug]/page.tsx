@@ -7,10 +7,12 @@ import Image from "next/image";
 // Script tags for JSON-LD should be directly in the component JSX.
 // If you were using Pages Router, <Head> would be appropriate.
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'; // Added Card components
 import { Clock, MapPin, Phone, Star, StarHalf, Info, ExternalLink, ChevronRight } from "lucide-react"; // Added ChevronRight
 import Header from "@/components/Header";
 import DirectoryItemCard from "@/components/DirectoryItemCard";
 import Link from "next/link"; // Added Link
+import Leadform from '@/components/Leadform'; // Added Leadform import
 
 interface ItemPageProps {
   params: Promise<{ slug: string }> | { slug: string };
@@ -363,6 +365,22 @@ interface JsonLdBase {
             </div>
           </section>
         )}
+
+        {/* Leadform Section */}
+        <section className="mt-10 pt-8 border-t">
+          <Card className="max-w-2xl mx-auto shadow-lg">
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl font-semibold">Have Questions or Need a Quote?</CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Fill out the form below and we'll get back to you as soon as possible.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Leadform />
+            </CardContent>
+          </Card>
+        </section>
+
       </main>
     </>
   );

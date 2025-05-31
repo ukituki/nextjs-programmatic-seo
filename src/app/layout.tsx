@@ -98,10 +98,41 @@ export default function RootLayout({
     }
   `;
 
+  const siteName = `${nicheConfig.nicheNamePlural} Finder`; // Or a more generic site name from config if available
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const logoUrl = `${baseUrl}/images/logo.png`; // Placeholder logo URL
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteName,
+    url: baseUrl,
+    logo: logoUrl, // Optional: include if a logo is available
+    // sameAs: [] // Optional: array of social media URLs
+  };
+
+  const webSiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteName,
+    url: baseUrl,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${baseUrl}/search?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  const combinedSchemas = [organizationSchema, webSiteSchema];
+
   return (
     <html lang="en">
       <head>
         <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchemas) }}
+        />
       </head>
       {/* Use geistSans.variable for the main font setup, which includes --font-geist-sans */}
       {/* The custom font (if any) is prepended via --font-sans in the <style> block */}
