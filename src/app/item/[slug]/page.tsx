@@ -13,6 +13,7 @@ import Header from "@/components/Header";
 import DirectoryItemCard from "@/components/DirectoryItemCard";
 import Link from "next/link"; // Added Link
 import Leadform from '@/components/Leadform'; // Added Leadform import
+import AiFeatureMockup from '@/components/AiFeatureMockup'; // Added AI Feature Mockup import
 
 interface ItemPageProps {
   params: Promise<{ slug: string }> | { slug: string };
@@ -379,6 +380,15 @@ interface JsonLdBase {
               <Leadform />
             </CardContent>
           </Card>
+        </section>
+
+        {/* AI Feature Mockup Section */}
+        <section className="mt-10 pt-8 border-t">
+          <div className="max-w-2xl mx-auto"> {/* Consistent max-width and centering */}
+            {/* Optional: Add a title for this section if desired */}
+            {/* <h2 className="text-xl font-semibold mb-4 text-center">AI Assistant</h2> */}
+            <AiFeatureMockup />
+          </div>
         </section>
 
       </main>

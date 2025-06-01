@@ -66,7 +66,7 @@ export const windowsAndDoorsConfig: NicheConfig = {
     ],
   },
   assets: {
-    homeBannerImage: "/images/placeholder-banner.png", // Using existing placeholder
+    homeBannerImage: "/images/placeholder-banner.jpg", // Changed to .jpg to avoid SVG error
   },
   theme: {
     primaryColor: "#004A7F", // A suitable blue
